@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
+	"time"
 
 	"github.com/gin-contrib/opengintracing"
 	"github.com/gin-gonic/gin"
@@ -17,10 +19,11 @@ var version string
 func main() {
 	// Configure tracing
 	propagator := zipkin.NewZipkinB3HTTPHeaderPropagator()
+	sender, _ := jaeger.NewUDPTransport(os.Getenv("JAEGER_AGENT_HOST"), 0)
 	trace, closer := jaeger.NewTracer(
 		"openintracing example "+version,
 		jaeger.NewConstSampler(true),
-		jaeger.NewNullReporter(),
+		jaeger.NewRemoteReporter(sender, jaeger.ReporterOptions.BufferFlushInterval(1*time.Second)),
 		jaeger.TracerOptions.Injector(opentracing.HTTPHeaders, propagator),
 		jaeger.TracerOptions.Extractor(opentracing.HTTPHeaders, propagator),
 		jaeger.TracerOptions.ZipkinSharedRPCSpan(true),
