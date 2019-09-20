@@ -11,8 +11,10 @@ stages:
       buildContext: .
       tag: j75689/${CICD_GIT_REPO_NAME}
   - runScriptConfig:
-      image: busybox
-      shellScript: echo ${DOCKER_KEY}
+      image: docker:stable
+      shellScript: |-
+        echo ${DOCKER_KEY}
+        docker ps
     envFrom:
     - sourceName: pipeline-docker-secret
       sourceKey: account
