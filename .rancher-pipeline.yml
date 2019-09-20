@@ -10,7 +10,12 @@ stages:
       dockerfilePath: ./dockerfile
       buildContext: .
       tag: j75689/${CICD_GIT_REPO_NAME}
-      pushRemote: true
-      registry: registry.hub.docker.com
+  - runScriptConfig:
+      image: busybox
+      shellScript: echo ${DOCKER_KEY}
+      envFrom:
+      - sourceName: pipeline-docker-secret
+        sourceKey: account
+        targetKey: DOCKER_KEY 
 timeout: 60
 notification: {}
