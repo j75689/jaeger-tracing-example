@@ -5,7 +5,7 @@ stages:
       image: golang:latest
       shellScript: |-
         echo building... version:${CICD_GIT_BRANCH}
-        CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags ' -X "main.version='"${CICD_GIT_BRANCH}"'"' -o example
+        CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags '-X "main.version='"${CICD_GIT_BRANCH}"'"' -o example
 - name: build-image
   steps:
   - publishImageConfig:

@@ -30,7 +30,7 @@ func main() {
 
 	r := gin.Default()
 	r.POST("/headers", opengintracing.NewSpan(trace, "get headers"), handlePrintHeaders)
-	r.GET("/version", opengintracing.NewSpan(trace, "version"))
+	r.GET("/version", opengintracing.NewSpan(trace, "version"), handleVersion)
 	fmt.Println(r.Run(":8080"))
 }
 
