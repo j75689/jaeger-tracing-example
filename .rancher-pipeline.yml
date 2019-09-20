@@ -10,6 +10,6 @@ stages:
       dockerfilePath: ./dockerfile
       buildContext: .
       tag: j75689/jaeger-tracing-example
-      registry: 127.0.0.1:34011
+      registry: https://registry.hub.docker.com
 timeout: 60
 notification: {}
