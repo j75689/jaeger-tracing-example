@@ -3,13 +3,13 @@ stages:
   steps:
   - runScriptConfig:
       image: golang:latest
-      shellScript: CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o example
+      shellScript: CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags ' -X "main.version='"${CICD_GIT_BRANCH}"'"' -o example
 - name: build-image
   steps:
   - publishImageConfig:
       dockerfilePath: ./dockerfile
       buildContext: .
-      tag: j75689/${CICD_GIT_REPO_NAME}
+      tag: j75689/${CICD_GIT_REPO_NAME}:${CICD_GIT_BRANCH}
       pushRemote: true
       registry: index.docker.io
 timeout: 60
