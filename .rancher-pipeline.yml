@@ -16,6 +16,6 @@ stages:
       envFrom:
       - sourceName: pipeline-docker-secret
         sourceKey: account
-        targetKey: DOCKER_KEY 
+        targetKey: DOCKER_KEY
 timeout: 60
 notification: {}
