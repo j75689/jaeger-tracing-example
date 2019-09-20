@@ -1,6 +1,6 @@
-FROM golang:alpine
-COPY . /app
+FROM alpine
+COPY ./example /app/example
 WORKDIR /app
 EXPOSE 8080
 
-CMD go run main.go
+CMD ./example
