@@ -14,5 +14,9 @@ stages:
       tag: j75689/${CICD_GIT_REPO_NAME}:${CICD_GIT_BRANCH}
       pushRemote: true
       registry: index.docker.io
+- name: deploy
+  steps:
+  - applyYamlConfig:
+      path: ./.deployment.yaml
 timeout: 60
 notification: {}

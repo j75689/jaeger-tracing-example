@@ -1,0 +1,33 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: helloserver-service
+spec:
+  selector:
+    app: helloserver
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-helloserver
+  labels:
+    app: helloserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: helloserver
+  template:
+    metadata:
+      labels:
+        app: helloserver
+    spec:
+      containers:
+      - name: helloserver
+        image: j75689/${CICD_GIT_REPO_NAME}:${CICD_GIT_BRANCH}
+        ports:
+        - containerPort: 8080
