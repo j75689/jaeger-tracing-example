@@ -19,6 +19,6 @@ stages:
   - applyYamlConfig:
       path: ./.deployment.yaml
     env:
-        JAEGER_AGENT_HOST: 'jaeger-agent.istio-system:5775'
+      JAEGER_AGENT_HOST: jaeger-agent.istio-system:5775
 timeout: 60
 notification: {}
