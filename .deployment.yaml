@@ -29,5 +29,8 @@ spec:
       containers:
       - name: helloserver
         image: j75689/${CICD_GIT_REPO_NAME}:${CICD_GIT_BRANCH}
+        env:
+        - name: JAEGER_AGENT_HOST
+          value: ${JAEGER_AGENT_HOST}
         ports:
         - containerPort: 8080
